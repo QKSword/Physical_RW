@@ -1,0 +1,8 @@
+﻿  Building 'Physical_RW' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping x64\Debug\Physical_RW.inf [Version] section with DriverVer=09/30/2019,16.24.26.67
+  Physical_RW.c
+  Physical_RW.vcxproj -> E:\project\Physical_RW\Physical_RW\x64\Debug\Physical_RW.sys
+  Physical_RW.vcxproj -> E:\project\Physical_RW\Physical_RW\x64\Debug\Physical_RW.pdb (Full PDB)
+  Done Adding Additional Store
+  Successfully signed: E:\project\Physical_RW\Physical_RW\x64\Debug\Physical_RW.sys
+  

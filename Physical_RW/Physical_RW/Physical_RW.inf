@@ -1,0 +1,90 @@
+;
+; Physical_RW.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=Physical_RW.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+Physical_RW.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%Physical_RW.DeviceDesc%=Physical_RW_Device, Root\Physical_RW ; TODO: edit hw-id
+
+[Physical_RW_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+Physical_RW.sys
+
+;-------------- Service installation
+[Physical_RW_Device.NT.Services]
+AddService = Physical_RW,%SPSVCINST_ASSOCSERVICE%, Physical_RW_Service_Inst
+
+; -------------- Physical_RW driver install sections
+[Physical_RW_Service_Inst]
+DisplayName    = %Physical_RW.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Physical_RW.sys
+
+;
+;--- Physical_RW_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+Physical_RW_Device_CoInstaller_CopyFiles = 11
+
+[Physical_RW_Device.NT.CoInstallers]
+AddReg=Physical_RW_Device_CoInstaller_AddReg
+CopyFiles=Physical_RW_Device_CoInstaller_CopyFiles
+
+[Physical_RW_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[Physical_RW_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SourceDisksFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[Physical_RW_Device.NT.Wdf]
+KmdfService =  Physical_RW, Physical_RW_wdfsect
+[Physical_RW_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "Physical_RW Installation Disk"
+Physical_RW.DeviceDesc = "Physical_RW Device"
+Physical_RW.SVCDESC = "Physical_RW Service"

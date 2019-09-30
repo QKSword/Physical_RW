@@ -1,0 +1,7 @@
+﻿  Write.c
+e:\project\physical_rw\write\write\write\write.c(30): warning C4477: “scanf_s”: 格式字符串“%hhx”需要类型“unsigned char *”的参数，但可变参数 2 拥有了类型“DWORD32 *”
+  e:\project\physical_rw\write\write\write\write.c(30): note: 请考虑在格式字符串中使用“%x”
+  e:\project\physical_rw\write\write\write\write.c(30): note: 请考虑在格式字符串中使用“%Ix”
+  e:\project\physical_rw\write\write\write\write.c(30): note: 请考虑在格式字符串中使用“%I32x”
+  Write.vcxproj -> E:\project\Physical_RW\Write\Write\Debug\Write.exe
+  Write.vcxproj -> E:\project\Physical_RW\Write\Write\Debug\Write.pdb (Full PDB)
